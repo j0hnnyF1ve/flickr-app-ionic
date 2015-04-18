@@ -12,19 +12,54 @@
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
+    <script src="lib/ionic-image-lazy-load.js"></script>
+
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
     <!-- your app's js -->
+    <script src="js/flickr/FlickrService.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/controllers.js"></script>
   </head>
-  <body ng-app="starter">
+  <body ng-app="main">
 
     <ion-pane>
-      <ion-header-bar class="bar-stable">
-        <h1 class="title">Ionic Blank Starter</h1>
+      <ion-header-bar class="bar-positive" align-title="left" 
+        ng-controller="HeaderController as header">
+          <h1 class="title">John's Flickr App</h1>
+          <div class="buttons" >
+            <button ng-show="!header.searchActive" class="search ion-android-search" ng-click="header.openSearch()"></button>
+            <button ng-show="header.searchActive" class="close ion-close" ng-click="header.closeSearch()"></button>
+          </div>
+          <div class="searchField" ng-show="header.searchActive">
+            <label class="item item-input">
+              <span class="input-label">Search Flickr:</span>
+              <input ng-model="header.searchTerm" type="text" ng-keypress="header.handleKeyPress($event)">
+            </label>
+          </div>
       </ion-header-bar>
-      <ion-content>
+
+      <ion-header-bar class="bar-subheader bar-dark" align-title="left" 
+        ng-controller="SubHeaderController as subheader">
+        <h1 class="title" ng-bind="subheader.searchTerm"></h1>
+      </ion-header-bar>
+
+      <ion-content lazy-scroll class="has-header has-subheader" ng-controller="ContentController as content">
+<!--
+        <div class="row" ng-if="$index % 2 === 0" collection-repeat="photo in content.photos" >
+-->
+        <div class="row" ng-if="$index % 2 === 0" ng-repeat="photo in content.photos" >
+          <div class="col col-50" ng-if="$index < content.photos.length">
+            <img image-lazy-src="{{content.photos[$index].photoUrl}}" />
+            <label ng-bind="content.photos[$index].caption"></label>
+          </div>
+          <div class="col col-50" ng-if="$index + 1 < content.photos.length">
+            <img image-lazy-src="{{content.photos[$index + 1].photoUrl}}" />
+            <label ng-bind="content.photos[$index + 1].caption"></label>
+          </div>
+        </div>
       </ion-content>
     </ion-pane>
   </body>

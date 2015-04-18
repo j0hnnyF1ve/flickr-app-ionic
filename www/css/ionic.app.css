@@ -7602,3 +7602,29 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
+
+.searchField .item-input {
+  padding-top: 0;
+  padding-bottom: 0; }
+
+ion-content {
+  background-color: #000; }
+
+ion-content img {
+  width: 100%;
+  height: 100%; }
+
+ion-content label {
+  position: absolute;
+  max-height: 62px;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(90, 90, 90, 0.7);
+  width: 96%;
+  color: #fff;
+  padding: 2px 4px; }
+
+ion-content div.row div.col {
+  position: relative;
+  max-height: 175px;
+  overflow: hidden; }
