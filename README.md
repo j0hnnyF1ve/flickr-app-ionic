@@ -1,2 +1,2 @@
 # flickr-app-ionic
-A Flickr App built using Ionic/AngulraJS
+A Flickr App built using Ionic/AngularJS
